@@ -4,6 +4,7 @@ from .models import City
 from .forms import CityForm
 
 
+
 # Create your views here.
 
 def index(request):
@@ -20,7 +21,7 @@ def index(request):
     weather_data = []
 
     for city in cities:  #return all cities in database
-        city_weather = requests.get(url.format(city)).json() # Запрос к АПИ и конвертация в  JSON
+        city_weather = requests.get(url.format(city.name)).json() # Запрос к АПИ и конвертация в  JSON
     # print(city_weather.text)
 
 
@@ -28,7 +29,7 @@ def index(request):
             'city': city.name,
             'temperature': city_weather["main"]["temp"],
             'description': city_weather["weather"][0]["description"],
-            'icon': city_weather["weather"][0]["icon"]
+            'icon': city_weather["weather"][0]["icon"],
         }
         weather_data.append(weather) # add data for current city into our list
 
